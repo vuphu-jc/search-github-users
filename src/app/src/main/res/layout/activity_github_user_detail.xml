@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.github_user_detail.GithubUserDetailActivity">
+
+
+    <ImageView
+        android:id="@+id/avatarImageView"
+        android:layout_marginTop="@dimen/normal_100"
+        android:layout_width="@dimen/huge_250"
+        android:layout_height="@dimen/huge_250"
+        android:background="@android:drawable/picture_frame"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:layout_marginTop="@dimen/normal_100"
+        android:id="@+id/loginTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_100"
+        android:layout_marginEnd="@dimen/small_100"
+        android:text="@string/label_preview"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/normal_175"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/avatarImageView"
+        />
+
+    <TextView
+        android:id="@+id/idTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_100"
+        android:layout_marginEnd="@dimen/small_100"
+        android:text="@string/label_preview"
+        android:textSize="@dimen/normal_125"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginTextView"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/reposLabelTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_150"
+        android:layout_marginStart="@dimen/small_100"
+        android:layout_marginEnd="@dimen/small_100"
+        android:text="@string/label_repositories"
+        android:textSize="@dimen/normal_100"
+        android:textColor="@android:color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/idTextView"
+        android:gravity="left" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reposRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/small_100"
+        app:layout_constraintTop_toBottomOf="@id/reposLabelTextView"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

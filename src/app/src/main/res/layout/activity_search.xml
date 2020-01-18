@@ -4,24 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.main.MainActivity">
+    tools:context=".ui.activity.search.SearchActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/normal_200"
+        android:layout_margin="@dimen/normal_100"
         app:cardCornerRadius="@dimen/normal_200"
-        app:cardElevation="@dimen/small_100"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/large_150"
             android:orientation="horizontal"
-            android:id="@+id/searchLinearLayout"
             style="@style/EffectOnClick" >
 
             <ImageView
@@ -31,26 +27,28 @@
                 android:layout_marginStart="@dimen/normal_200"
                 android:src="@drawable/ic_search_black_24dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/normal_200"
-                android:text="@string/hint_search"
-                android:textColor="@android:color/black" />
-
+                android:layout_marginStart="@dimen/normal_100"
+                android:layout_marginEnd="@dimen/normal_100"
+                android:textColor="@android:color/black"
+                android:hint="@string/hint_search"
+                android:backgroundTint="@android:color/transparent"
+                android:textCursorDrawable="@drawable/cs_color"
+                android:singleLine="true"
+                android:imeOptions="actionDone" />
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
-
-    <ImageView
-        android:layout_width="@dimen/logo_size"
-        android:layout_height="@dimen/logo_size"
-        android:src="@drawable/github_logo"
-        android:layout_marginBottom="@dimen/normal_200"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/usersRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/normal_100"
+        app:layout_constraintTop_toBottomOf="@id/cardView"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

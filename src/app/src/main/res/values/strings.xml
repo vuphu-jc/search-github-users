@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">SearchGithubUsers</string>
+    <string name="hint_search">Tìm kiếm ...</string>
+    <string name="label_preview">PREVIEW</string>
+    <string name="label_repositories">Repositories</string>
 </resources>
