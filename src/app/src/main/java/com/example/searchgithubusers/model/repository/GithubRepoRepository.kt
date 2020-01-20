@@ -24,11 +24,15 @@ class GithubRepoRepositoryImp: GithubRepoRepository {
             override fun call(t: Subscriber<in List<GithubRepo>>?) {
                 val url = "$API_SOURCE/users/$name/repos"
                 val jsonContent = HttpURLConnectionUtils.getContent(url)
-                val itemType = object : TypeToken<List<GithubRepo>>() {}.type
-                val data = (Gson()).fromJson<List<GithubRepo>>(jsonContent, itemType)
-                t?.onNext(data)
+                t?.onNext(parseJsonToList(jsonContent))
                 t?.onCompleted()
             }
         })
+    }
+
+    private fun parseJsonToList(jsonContent: String): List<GithubRepo> {
+        val itemType = object : TypeToken<List<GithubRepo>>() {}.type
+        val data = (Gson()).fromJson<List<GithubRepo>>(jsonContent, itemType)
+        return data
     }
 }

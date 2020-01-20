@@ -31,6 +31,11 @@ class SearchActivity : BaseActivity(), SearchContract.View {
         initialize()
     }
 
+    override fun onDestroy() {
+        mPresenter.detach()
+        super.onDestroy()
+    }
+
     override fun showProgressLoadData(isShow: Boolean) {
         mUsersAdapter.showLoadingProgress(isShow)
     }

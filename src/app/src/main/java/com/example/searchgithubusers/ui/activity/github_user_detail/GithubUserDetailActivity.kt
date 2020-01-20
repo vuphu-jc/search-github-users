@@ -33,6 +33,11 @@ class GithubUserDetailActivity : BaseActivity(), GithubUserDetailContract.View {
         initialize()
     }
 
+    override fun onDestroy() {
+        mPresenter.detach()
+        super.onDestroy()
+    }
+
     override fun showProgressLoadData(isShow: Boolean) {
         mReposAdapter.showLoadingProgress(isShow)
     }
