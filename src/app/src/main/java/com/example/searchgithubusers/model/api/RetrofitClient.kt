@@ -18,8 +18,7 @@ class RetrofitClient private constructor(){
 
         fun getInstance(): RetrofitClient {
             val tempInstance = sInstance
-            if (tempInstance != null)
-                return tempInstance
+            if (tempInstance != null) return tempInstance
             synchronized(this) {
                 val instance = RetrofitClient()
                 sInstance = instance

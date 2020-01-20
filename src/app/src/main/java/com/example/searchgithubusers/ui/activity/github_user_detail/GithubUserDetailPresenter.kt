@@ -13,11 +13,11 @@ import rx.schedulers.Schedulers
 
 class GithubUserDetailPresenter: GithubUserDetailContract.Presenter {
 
-    private lateinit var mView: GithubUserDetailContract.View
+    private var mView: GithubUserDetailContract.View? = null
     private var mRepository = GithubRepoRepositoryRetrofitImp()
 
     override fun detach() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mView = null
     }
 
     override fun attach(view: GithubUserDetailContract.View) {
@@ -25,20 +25,20 @@ class GithubUserDetailPresenter: GithubUserDetailContract.Presenter {
     }
 
     override fun loadRepo(name: String) {
-        mView.showProgressLoadData(true)
+        mView?.showProgressLoadData(true)
         mRepository.fetchAllRepo(name)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : Observer<List<GithubRepo>> {
                 override fun onError(e: Throwable?) {
-                    mView.showProgressLoadData(false)
-                    mView.loadDataFailed(e?.message.toString())
+                    mView?.showProgressLoadData(false)
+                    mView?.loadDataFailed(e?.message.toString())
                 }
 
                 override fun onNext(t: List<GithubRepo>?) {
-                    mView.showProgressLoadData(false)
+                    mView?.showProgressLoadData(false)
                     if (t != null)
-                        mView.loadDataSuccess(t)
+                        mView?.loadDataSuccess(t)
                 }
 
                 override fun onCompleted() {

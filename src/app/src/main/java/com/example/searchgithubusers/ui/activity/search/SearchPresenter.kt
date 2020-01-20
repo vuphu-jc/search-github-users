@@ -14,10 +14,11 @@ class SearchPresenter: SearchContract.Presenter<SearchContract.View> {
         private const val PER_PAGE = 20
     }
 
-    private lateinit var mView: SearchContract.View
+    private var mView: SearchContract.View? = null
     private var mRepository = GithubUserRepositoryRetrofitImp()
 
     override fun detach() {
+        mView = null
     }
 
     override fun attach(view: SearchContract.View) {
@@ -25,20 +26,20 @@ class SearchPresenter: SearchContract.Presenter<SearchContract.View> {
     }
 
     override fun loadData(name: String, times: Int) {
-        mView.showProgressLoadData(true)
-        mRepository.fetchUsersByName(name, 20, times)
+        mView?.showProgressLoadData(true)
+        mRepository.fetchUsersByName(name, PER_PAGE, times)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : Observer<List<GithubUser>> {
                 override fun onError(e: Throwable?) {
-                    mView.showProgressLoadData(false)
-                    mView.loadDataFailed(e?.message.toString())
+                    mView?.showProgressLoadData(false)
+                    mView?.loadDataFailed(e?.message.toString())
                 }
 
                 override fun onNext(t: List<GithubUser>?) {
-                    mView.showProgressLoadData(false)
+                    mView?.showProgressLoadData(false)
                     if (t != null)
-                        mView.loadDataSuccess(t)
+                        mView?.loadDataSuccess(t)
                 }
 
                 override fun onCompleted() {

@@ -33,6 +33,11 @@ class GithubUserDetailActivity : BaseActivity(), GithubUserDetailContract.View {
         initialize()
     }
 
+    override fun onDestroy() {
+        mPresenter.detach()
+        super.onDestroy()
+    }
+
     override fun showProgressLoadData(isShow: Boolean) {
         mReposAdapter.showLoadingProgress(isShow)
     }
@@ -57,6 +62,8 @@ class GithubUserDetailActivity : BaseActivity(), GithubUserDetailContract.View {
         reposRecyclerView.layoutManager = LinearLayoutManager(this)
         mPresenter.attach(this)
 
-        mPresenter.loadRepo(mGithubUserData?.login as String)
+        val login: String? = mGithubUserData?.login
+        if (login != null)
+            mPresenter.loadRepo(login)
     }
 }
