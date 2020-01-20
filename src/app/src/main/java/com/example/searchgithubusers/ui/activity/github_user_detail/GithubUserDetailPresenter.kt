@@ -4,6 +4,7 @@ import com.example.searchgithubusers.model.dto.GithubRepo
 import com.example.searchgithubusers.model.dto.GithubUser
 import com.example.searchgithubusers.model.repository.GithubRepoRepository
 import com.example.searchgithubusers.model.repository.GithubRepoRepositoryImp
+import com.example.searchgithubusers.model.repository.GithubRepoRepositoryRetrofitImp
 import com.example.searchgithubusers.model.repository.GithubUserRepositoryImp
 import com.example.searchgithubusers.ui.activity.search.SearchContract
 import rx.Observer
@@ -13,7 +14,7 @@ import rx.schedulers.Schedulers
 class GithubUserDetailPresenter: GithubUserDetailContract.Presenter {
 
     private lateinit var mView: GithubUserDetailContract.View
-    private var mRepository = GithubRepoRepositoryImp()
+    private var mRepository = GithubRepoRepositoryRetrofitImp()
 
     override fun detach() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

@@ -1,5 +1,6 @@
 package com.example.searchgithubusers.model.repository
 
+import com.example.searchgithubusers.model.api.RetrofitClient
 import com.example.searchgithubusers.model.dto.GithubRepo
 import com.example.searchgithubusers.utils.HttpURLConnectionUtils
 import com.google.gson.Gson
@@ -31,4 +32,12 @@ class GithubRepoRepositoryImp: GithubRepoRepository {
             }
         })
     }
+}
+
+class GithubRepoRepositoryRetrofitImp: GithubRepoRepository {
+    override fun fetchAllRepo(name: String): Observable<List<GithubRepo>> {
+        return RetrofitClient.getInstance().getAPIService()
+            .getRepos(name)
+    }
+
 }

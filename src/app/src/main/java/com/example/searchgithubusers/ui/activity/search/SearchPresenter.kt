@@ -3,6 +3,7 @@ package com.example.searchgithubusers.ui.activity.search
 import android.os.Handler
 import com.example.searchgithubusers.model.dto.GithubUser
 import com.example.searchgithubusers.model.repository.GithubUserRepositoryImp
+import com.example.searchgithubusers.model.repository.GithubUserRepositoryRetrofitImp
 import rx.Observer
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -14,7 +15,7 @@ class SearchPresenter: SearchContract.Presenter<SearchContract.View> {
     }
 
     private lateinit var mView: SearchContract.View
-    private var mRepository = GithubUserRepositoryImp()
+    private var mRepository = GithubUserRepositoryRetrofitImp()
 
     override fun detach() {
     }

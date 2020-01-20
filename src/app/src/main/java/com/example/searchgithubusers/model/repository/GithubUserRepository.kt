@@ -1,11 +1,13 @@
 package com.example.searchgithubusers.model.repository
 
 import android.util.Log
+import com.example.searchgithubusers.model.api.RetrofitClient
 import com.example.searchgithubusers.model.dto.GithubUser
 import com.example.searchgithubusers.model.dto.ListGithubUser
 import com.example.searchgithubusers.utils.HttpURLConnectionUtils
 import com.google.gson.Gson
 import com.google.gson.JsonParser
+import retrofit2.Retrofit
 import rx.Observable
 import rx.Scheduler
 import rx.Subscriber
@@ -45,5 +47,21 @@ class GithubUserRepositoryImp: GithubUserRepository {
                 return Observable.just(data)
             }
         })
+    }
+}
+
+class GithubUserRepositoryRetrofitImp: GithubUserRepository {
+    override fun fetchUsersByName(
+        name: String,
+        perPage: Int,
+        page: Int
+    ): Observable<List<GithubUser>> {
+        return RetrofitClient.getInstance().getAPIService().fetchUsersByName(name, perPage, page)
+            .map { it.items }
+    }
+
+    override fun fetchAllUsersByName(name: String): Observable<List<GithubUser>> {
+        return RetrofitClient.getInstance().getAPIService().fetchAllUsersByName(name)
+            .map { it.items }
     }
 }
