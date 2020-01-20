@@ -26,7 +26,7 @@ class SearchPresenter: SearchContract.Presenter<SearchContract.View> {
 
     override fun loadData(name: String, times: Int) {
         mView?.showProgressLoadData(true)
-        mRepository.fetchUsersByName(name, 20, times)
+        mRepository.fetchUsersByName(name, PER_PAGE, times)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : Observer<List<GithubUser>> {
