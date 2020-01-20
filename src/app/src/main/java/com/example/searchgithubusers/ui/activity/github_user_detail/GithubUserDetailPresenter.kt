@@ -13,8 +13,8 @@ import rx.schedulers.Schedulers
 
 class GithubUserDetailPresenter: GithubUserDetailContract.Presenter {
 
+    lateinit var mRepository: GithubRepoRepository
     private var mView: GithubUserDetailContract.View? = null
-    private var mRepository = GithubRepoRepositoryRetrofitImp()
 
     override fun detach() {
         mView = null

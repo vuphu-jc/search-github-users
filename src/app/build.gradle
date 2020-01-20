@@ -31,6 +31,7 @@ dependencies {
     apply plugin: 'com.android.application'
     apply plugin: 'kotlin-android'
     apply plugin: 'kotlin-android-extensions'
+    apply plugin: 'kotlin-kapt'
 
     androidExtensions {
         experimental = true
@@ -47,10 +48,16 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.4.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    def daggerVer = 2.12 // or latest version
+    implementation "com.google.dagger:dagger:$daggerVer"
+    implementation "com.google.dagger:dagger-android-support:$daggerVer"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVer"
+    kapt "com.google.dagger:dagger-compiler:$daggerVer"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

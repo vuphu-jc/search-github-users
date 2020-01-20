@@ -9,26 +9,37 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.searchgithubusers.R
+import com.example.searchgithubusers.application.MainApplication
 import com.example.searchgithubusers.model.dto.GithubUser
+import com.example.searchgithubusers.ui.activity.main.MainContract
 import com.example.searchgithubusers.ui.base.BaseActivity
 import com.example.searchgithubusers.ui.recyclerview.GithubUserRecyclerViewAdapter
 import com.example.searchgithubusers.ui.recyclerview.base.CustomRecyclerView
 import com.example.searchgithubusers.utils.ActivityUtils
 import kotlinx.android.synthetic.main.activity_search.*
+import javax.inject.Inject
 
 
 class SearchActivity : BaseActivity(), SearchContract.View {
 
+    @Inject
+    lateinit var mPresenter: SearchContract.Presenter
+
     private val mItems = mutableListOf<CustomRecyclerView.Item>()
     private var mUsersAdapter = GithubUserRecyclerViewAdapter(this, mItems)
-    private val mPresenter = SearchPresenter()
     private var mLoadTimes = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        injectDependency()
         initialize()
+    }
+
+    override fun onStart() {
+        mPresenter.attach(this)
+        super.onStart()
     }
 
     override fun onDestroy() {
@@ -53,10 +64,18 @@ class SearchActivity : BaseActivity(), SearchContract.View {
         mUsersAdapter.showError(message)
     }
 
+    private fun injectDependency() {
+        DaggerSearchComponent.builder()
+            .appComponent((application as MainApplication).getAppComponent())
+            .searchModule(SearchModule())
+            .build()
+            .inject(this)
+    }
+
+
     private fun initialize() {
         usersRecyclerView.adapter = mUsersAdapter
         usersRecyclerView.layoutManager = LinearLayoutManager(this)
-        mPresenter.attach(this)
 
         searchEditText.setOnEditorActionListener(object: TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {

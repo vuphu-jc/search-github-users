@@ -9,7 +9,7 @@ interface GithubUserDetailContract {
         fun loadDataSuccess(data: List<GithubRepo>)
         fun loadDataFailed(message: String)
     }
-    interface Presenter: BaseContract.Presenter<View> {
+    interface Presenter : BaseContract.Presenter<View> {
         fun loadRepo(name: String)
     }
 }

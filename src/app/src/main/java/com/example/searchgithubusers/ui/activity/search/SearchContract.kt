@@ -9,7 +9,7 @@ interface SearchContract {
         fun loadDataSuccess(data: List<GithubUser>)
         fun loadDataFailed(message: String)
     }
-    interface Presenter<T> : BaseContract.Presenter<View> {
+    interface Presenter : BaseContract.Presenter<View> {
         fun loadData(name: String, times: Int = 1)
     }
 }

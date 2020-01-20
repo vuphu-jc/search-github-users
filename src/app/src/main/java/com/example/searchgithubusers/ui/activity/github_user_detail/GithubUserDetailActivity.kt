@@ -5,14 +5,18 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.searchgithubusers.R
+import com.example.searchgithubusers.application.MainApplication
 import com.example.searchgithubusers.model.dto.GithubRepo
 import com.example.searchgithubusers.model.dto.GithubUser
+import com.example.searchgithubusers.ui.activity.search.DaggerSearchComponent
+import com.example.searchgithubusers.ui.activity.search.SearchModule
 import com.example.searchgithubusers.ui.activity.search.SearchPresenter
 import com.example.searchgithubusers.ui.base.BaseActivity
 import com.example.searchgithubusers.ui.recyclerview.GithubRepoRecyclerViewAdapter
 import com.example.searchgithubusers.ui.recyclerview.GithubUserRecyclerViewAdapter
 import com.example.searchgithubusers.ui.recyclerview.base.CustomRecyclerView
 import kotlinx.android.synthetic.main.activity_github_user_detail.*
+import javax.inject.Inject
 
 class GithubUserDetailActivity : BaseActivity(), GithubUserDetailContract.View {
 
@@ -20,17 +24,25 @@ class GithubUserDetailActivity : BaseActivity(), GithubUserDetailContract.View {
         const val GITHUB_USER_EXTRA = "GITHUB_USER"
     }
 
+    @Inject
+    lateinit var mPresenter: GithubUserDetailContract.Presenter
+
     private var mGithubUserData: GithubUser? = null
     private val mItems = mutableListOf<CustomRecyclerView.Item>()
     private var mReposAdapter = GithubRepoRecyclerViewAdapter(this, mItems)
-    private val mPresenter = GithubUserDetailPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_github_user_detail)
 
         mGithubUserData = intent.getParcelableExtra(GITHUB_USER_EXTRA)
+        injectDependency()
         initialize()
+    }
+
+    override fun onStart() {
+        mPresenter.attach(this)
+        super.onStart()
     }
 
     override fun onDestroy() {
@@ -49,6 +61,14 @@ class GithubUserDetailActivity : BaseActivity(), GithubUserDetailContract.View {
 
     override fun loadDataFailed(message: String) {
         mReposAdapter.showError(message)
+    }
+
+    private fun injectDependency() {
+        DaggerGithubUserDetailComponent.builder()
+            .appComponent((application as MainApplication).getAppComponent())
+            .githubUserDetailModule(GithubUserDetailModule())
+            .build()
+            .inject(this)
     }
 
     private fun initialize() {
