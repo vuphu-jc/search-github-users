@@ -2,6 +2,7 @@ package com.example.searchgithubusers.ui.activity.main
 
 import android.content.Intent
 import android.os.Bundle
+import com.example.searchgithubusers.Global
 import com.example.searchgithubusers.R
 import com.example.searchgithubusers.ui.base.BaseActivity
 import com.example.searchgithubusers.ui.activity.search.SearchActivity
@@ -12,6 +13,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Global.initialize(applicationContext)
         initialize()
     }
 

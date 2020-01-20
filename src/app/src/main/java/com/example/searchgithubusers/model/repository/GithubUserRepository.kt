@@ -1,6 +1,7 @@
 package com.example.searchgithubusers.model.repository
 
 import android.util.Log
+import com.example.searchgithubusers.Global
 import com.example.searchgithubusers.model.api.RetrofitClient
 import com.example.searchgithubusers.model.dto.GithubUser
 import com.example.searchgithubusers.model.dto.ListGithubUser

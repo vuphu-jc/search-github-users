@@ -32,6 +32,7 @@ class GithubUserDetailPresenter: GithubUserDetailContract.Presenter {
             .subscribe(object : Observer<List<GithubRepo>> {
                 override fun onError(e: Throwable?) {
                     mView.showProgressLoadData(false)
+                    mView.loadDataFailed(e?.message.toString())
                 }
 
                 override fun onNext(t: List<GithubRepo>?) {

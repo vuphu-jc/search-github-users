@@ -1,6 +1,7 @@
 package com.example.searchgithubusers.model.api
 
 import android.content.Context
+import com.example.searchgithubusers.Global
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -31,7 +32,9 @@ class RetrofitClient private constructor(){
 
     init {
         mRetrofit = Retrofit.Builder().baseUrl(BASE_API_URL)
-            .client(OkHttpClient.Builder().build())
+            .client(OkHttpClient.Builder()
+                .addInterceptor(NetworkConnectionInterceptor(Global.getContext()))
+                .build())
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .build()

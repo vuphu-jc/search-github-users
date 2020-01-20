@@ -44,6 +44,10 @@ class SearchActivity : BaseActivity(), SearchContract.View {
         }
     }
 
+    override fun loadDataFailed(message: String) {
+        mUsersAdapter.showError(message)
+    }
+
     private fun initialize() {
         usersRecyclerView.adapter = mUsersAdapter
         usersRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -52,9 +56,7 @@ class SearchActivity : BaseActivity(), SearchContract.View {
         searchEditText.setOnEditorActionListener(object: TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    val oldSize = mItems.size
-                    mItems.clear()
-                    mUsersAdapter.notifyItemRangeRemoved(0, oldSize)
+                    mUsersAdapter.clearAllData()
                     mLoadTimes = 1
                     mPresenter.loadData(searchEditText.text.toString(), mLoadTimes)
                     ActivityUtils.hideKeyboard(this@SearchActivity)

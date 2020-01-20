@@ -7,6 +7,7 @@ interface SearchContract {
     interface View: BaseContract.View {
         fun showProgressLoadData(isShow: Boolean)
         fun loadDataSuccess(data: List<GithubUser>)
+        fun loadDataFailed(message: String)
     }
     interface Presenter<T> : BaseContract.Presenter<View> {
         fun loadData(name: String, times: Int = 1)

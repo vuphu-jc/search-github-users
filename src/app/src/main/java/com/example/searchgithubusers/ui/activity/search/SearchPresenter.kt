@@ -32,6 +32,7 @@ class SearchPresenter: SearchContract.Presenter<SearchContract.View> {
             .subscribe(object : Observer<List<GithubUser>> {
                 override fun onError(e: Throwable?) {
                     mView.showProgressLoadData(false)
+                    mView.loadDataFailed(e?.message.toString())
                 }
 
                 override fun onNext(t: List<GithubUser>?) {

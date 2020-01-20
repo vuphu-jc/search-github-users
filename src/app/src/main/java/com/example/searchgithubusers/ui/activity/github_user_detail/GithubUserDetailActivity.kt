@@ -42,6 +42,10 @@ class GithubUserDetailActivity : BaseActivity(), GithubUserDetailContract.View {
         mReposAdapter.notifyItemRangeInserted(0, data.size)
     }
 
+    override fun loadDataFailed(message: String) {
+        mReposAdapter.showError(message)
+    }
+
     private fun initialize() {
         if (mGithubUserData == null)
             finish()

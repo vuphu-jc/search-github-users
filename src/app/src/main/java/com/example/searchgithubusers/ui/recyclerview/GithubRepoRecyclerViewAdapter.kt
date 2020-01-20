@@ -12,9 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.searchgithubusers.R
 import com.example.searchgithubusers.model.dto.GithubRepo
 import com.example.searchgithubusers.model.dto.GithubUser
-import com.example.searchgithubusers.ui.recyclerview.base.CustomRecyclerView
-import com.example.searchgithubusers.ui.recyclerview.base.LoadingRecyclerViewItem
-import com.example.searchgithubusers.ui.recyclerview.base.LoadingRecyclerViewViewHolder
+import com.example.searchgithubusers.ui.recyclerview.base.*
 
 
 class GithubRepoRecyclerViewAdapter(context: Context, users: MutableList<CustomRecyclerView.Item>): CustomRecyclerView.Adapter(context, users){
@@ -25,6 +23,10 @@ class GithubRepoRecyclerViewAdapter(context: Context, users: MutableList<CustomR
         register(LoadingRecyclerViewItem::class.java.name,
             LoadingRecyclerViewViewHolder::class.java.name,
             R.layout.recyclerview_item_loading)
+        register(
+            TitleRecyclerViewItem::class.java.name,
+            TitleRecyclerViewViewHolder::class.java.name,
+            R.layout.recyclerview_item_title)
     }
 
     override fun getFactory(): CustomRecyclerView.ViewHolderFactory {
@@ -38,6 +40,13 @@ class GithubRepoRecyclerViewAdapter(context: Context, users: MutableList<CustomR
         } else {
             items.removeAt(items.size - 1)
             notifyItemRemoved(items.size - 1)
+        }
+    }
+
+    fun showError(message: String) {
+        if (items.size == 0 || (items.size > 0 && items.last() !is TitleRecyclerViewItem)) {
+            items.add(TitleRecyclerViewItem(message, true))
+            notifyItemInserted(items.size)
         }
     }
 

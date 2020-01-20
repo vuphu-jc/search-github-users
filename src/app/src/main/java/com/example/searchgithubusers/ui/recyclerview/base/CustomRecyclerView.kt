@@ -69,5 +69,11 @@ interface CustomRecyclerView {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.bind(items[position])
         }
+
+        fun clearAllData() {
+            val oldSize = items.size
+            items.clear()
+            notifyItemRangeRemoved(0, oldSize)
+        }
     }
 }
