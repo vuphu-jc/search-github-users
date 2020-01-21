@@ -4,4 +4,5 @@
     <string name="label_preview">PREVIEW</string>
     <string name="label_repositories">Repositories</string>
     <string name="message_no_network_connection">Không có kết nối mạng...</string>
+    <string name="label_github_trending">Github Trending</string>
 </resources>

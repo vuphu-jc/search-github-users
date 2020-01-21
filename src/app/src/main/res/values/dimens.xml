@@ -22,8 +22,9 @@
     <dimen name="huge_100">100dp</dimen>
     <dimen name="huge_150">200dp</dimen>
     <dimen name="huge_200">200dp</dimen>
-    <dimen name="huge_250">200dp</dimen>
+    <dimen name="huge_250">250dp</dimen>
     <dimen name="huge_300">300dp</dimen>
+    <dimen name="huge_350">350dp</dimen>
 
     <dimen name="logo_size">100dp</dimen>
 </resources>

@@ -29,25 +29,21 @@ class GithubUserRepositoryImp: GithubUserRepository {
     }
 
     override fun fetchUsersByName(name: String, perPage: Int, page: Int): Observable<List<GithubUser>> {
-        return Observable.defer(object: Func0<Observable<List<GithubUser>>> {
-            override fun call(): Observable<List<GithubUser>> {
-                val url = "$API_SOURCE/users?q=$name&per_page=$perPage&page=$page"
-                val jsonContent = HttpURLConnectionUtils.getContent(url)
-                val data = (Gson()).fromJson(jsonContent, ListGithubUser::class.java).items
-                return Observable.just(data)
-            }
-        })
+        return Observable.defer {
+            val url = "$API_SOURCE/users?q=$name&per_page=$perPage&page=$page"
+            val jsonContent = HttpURLConnectionUtils.getContent(url)
+            val data = (Gson()).fromJson(jsonContent, ListGithubUser::class.java).items
+            Observable.just(data)
+        }
     }
 
     override fun fetchAllUsersByName(name: String): Observable<List<GithubUser>> {
-        return Observable.defer(object: Func0<Observable<List<GithubUser>>> {
-            override fun call(): Observable<List<GithubUser>> {
-                val url = "$API_SOURCE/users?q=$name"
-                val jsonContent = HttpURLConnectionUtils.getContent(url)
-                val data = (Gson()).fromJson(jsonContent, ListGithubUser::class.java).items
-                return Observable.just(data)
-            }
-        })
+        return Observable.defer {
+            val url = "$API_SOURCE/users?q=$name"
+            val jsonContent = HttpURLConnectionUtils.getContent(url)
+            val data = (Gson()).fromJson(jsonContent, ListGithubUser::class.java).items
+            Observable.just(data)
+        }
     }
 }
 

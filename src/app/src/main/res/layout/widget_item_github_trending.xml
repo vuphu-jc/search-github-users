@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/trendingLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground" >
+
+        <ImageView
+            android:id="@+id/avatarImageView"
+            android:layout_width="@dimen/large_175"
+            android:layout_height="@dimen/large_175"
+            android:background="@android:drawable/picture_frame"
+            android:src="@drawable/github_logo" />
+
+        <TextView
+            android:id="@+id/loginTextView"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_100"
+            android:layout_marginEnd="@dimen/small_100"
+            android:text="@string/label_preview"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/normal_125"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/starsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_100"
+            android:layout_marginEnd="@dimen/small_50"
+            android:text="@string/label_preview"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/normal_100"
+            android:gravity="right" />
+
+        <ImageView
+            android:id="@+id/githubLogoImageView"
+            android:layout_width="@dimen/normal_150"
+            android:layout_height="@dimen/normal_150"
+            android:src="@drawable/ic_star_yellow"
+            android:layout_marginEnd="@dimen/small_100" />
+
+    </LinearLayout>
+
+</LinearLayout>
